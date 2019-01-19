@@ -7,13 +7,15 @@
   "nativescript": {
     "id": "org.samtgarson.whatnext",
     "tns-ios": {
-      "version": "4.2.0"
+      "version": "5.0.0"
     },
     "tns-android": {
-      "version": "4.2.0"
+      "version": "5.0.0"
     }
   },
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint ./app"
+  },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
     "@vue/devtools": "5.0.0-beta.3",
@@ -23,12 +25,13 @@
     "nativescript-toast": "^1.4.6",
     "nativescript-vue": "^2.0.0",
     "nativescript-vue-devtools": "^1.0.0",
-    "tns-core-modules": "^4.2.0",
+    "tns-core-modules": "^5.1.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@samtgarson/eslint-config": "^1.0.3",
     "babel-loader": "^8.0.2",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
@@ -36,8 +39,17 @@
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
+    "eslint": "^5.0.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-import-resolver-jest": "^2.1.1",
+    "eslint-plugin-html": "^5.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.3",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-vue": "^5.0.0",
     "lazy": "1.0.11",
-    "nativescript-dev-webpack": "next",
+    "nativescript-dev-webpack": "^0.19.1-next-2019-01-14-120258-01",
     "nativescript-vue-template-compiler": "^2.0.0",
     "nativescript-worker-loader": "~0.9.0",
     "node-sass": "^4.9.2",
@@ -51,19 +63,27 @@
   },
   "eslintConfig": {
     "extends": [
-      "@samtgarson"
+      "@samtgarson",
+      "plugin:vue/strongly-recommended"
     ],
     "rules": {
       "vue/html-indent": [
         "error",
         2
-      ]
+      ],
+      "promise/prefer-await-to-callbacks": 0,
+      "promise/prefer-await-to-then": 0,
+      "vue/max-attributes-per-line": [
+        "error",
+        {
+          "singleline": 3,
+          "multiline": 3
+        }
+      ],
+      "vue/component-name-in-template-casing": 0
+    },
+    "globals": {
+      "TNS_ENV": false
     }
-  },
-  "prettier": {
-    "tabWidth": 2,
-    "semi": false,
-    "singleQuote": true,
-    "arrowParens": "avoid"
   }
 }
