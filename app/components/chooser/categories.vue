@@ -1,10 +1,11 @@
 <template>
   <FlexboxLayout columns="*, *, *" rows="*, *">
-    <Tappable 
-      v-for="category in categories" 
+    <Tappable
+      v-for="category in categories"
       class="category"
-      :key="category" 
-      @tap="setCategory(category)">
+      :key="category"
+      @tap="setCategory(category)"
+    >
       <Image :src="`~/assets/${category}.png`" />
     </Tappable>
   </FlexboxLayout>

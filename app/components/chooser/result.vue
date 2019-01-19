@@ -3,7 +3,7 @@
     <Label class="area">No results 😞</Label>
     <Tappable>
       <FlexboxLayout class="button" @tap="reset">
-      <Label>Try again</Label>
+        <Label>Try again</Label>
       </FlexboxLayout>
     </Tappable>
   </StackLayout>
@@ -27,7 +27,7 @@
 
 <script>
 import { openUrl } from 'utils/utils'
-import Tappable from '../../components/tappable'
+import Tappable from '../tappable'
 
 export default {
   components: { Tappable },
@@ -65,7 +65,7 @@ Label {
     text-align: left;
     margin-bottom: 5;
   }
-  
+
   &.title {
     width: 100%;
     text-align: left;
@@ -106,7 +106,7 @@ Label {
 
   Label {
     font-size: 20;
-    color: black; 
+    color: black;
     text-align: center;
     font-weight: 700;
   }

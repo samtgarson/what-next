@@ -13,27 +13,27 @@ export default {}
 
 <style lang="scss">
 @keyframes fadeIn {
-  from { opacity: 0 }
-  to { opacity: 1 }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-  from { opacity: 1 }
-  to { opacity: 0 }
-}
-
-.fade-enter-to {
-  animation: fadeIn 200ms ease-in-out both;
-}
-
-.fade-leave-to {
-  animation: fadeOut 200ms ease-in-out both;
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 </style>
 
 <style lang="scss" scoped>
 .page {
-  background: linear-gradient(to bottom, #12C2E9, #C471ED, #F64F59);
+  background: linear-gradient(to bottom, #12c2e9, #c471ed, #f64f59);
 }
 
 .pageLayout {

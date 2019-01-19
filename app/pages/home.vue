@@ -9,12 +9,13 @@
     <Box :height="initialHeight" ref="box">
       <Chooser @height="updateHeight" />
     </Box>
-    <transition name="fade">
-      <StackLayout width="50%" class="back" @tap="back" v-if="showBack" orientation="horizontal">
-        <Image src="~/assets/chevron.png" />
-        <Label>Never mind</Label>
-      </StackLayout>
-    </transition>
+    <StackLayout
+      width="50%" @tap="back" class="back"
+      orientation="horizontal" ref="back"
+    >
+      <Image src="~/assets/chevron.png" />
+      <Label>Never mind</Label>
+    </StackLayout>
   </Layout>
 </template>
 
@@ -32,11 +33,24 @@ export default {
   },
   computed: mapState({
     showRefresh: state => !!state.result,
-    showBack: state => !!state.params.category
+    showBack: state => state.stage > 0
   }),
+  watch: {
+    showBack (b, o) {
+      if (b === o) return
+
+      new Tweener(this.$refs.back.nativeView, {
+        from: { opacity: b ? 0 : 1 },
+        to: { opacity: b ? 1 : 0 },
+        ease: Tweener.easing.Quadratic.Out,
+        duration: 200
+      }).run()
+    }
+  },
   methods: {
     searchAgain () {
       this.$store.commit('searchAgain')
+      this.$refs.refresh.nativeView.rotate = 0
       this.$refs.refresh.nativeView.animate({
         rotate: 360,
         duration: 300
@@ -59,21 +73,23 @@ export default {
 
 <style lang="scss" scoped>
 #title {
-   font-weight: 600;
-   font-size: 40; 
-   color: #FFFFFF;
+  font-weight: 600;
+  font-size: 40;
+  color: #ffffff;
 }
 
 .back {
   height: 20;
   margin-bottom: -20;
+  opacity: 0;
 
-  Image {
+
+  image {
     height: 12.25;
     width: 7;
   }
 
-  Label {
+  label {
     margin-left: 5;
     color: white;
     font-weight: 600;

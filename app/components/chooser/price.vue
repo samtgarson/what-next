@@ -1,8 +1,11 @@
 <template>
   <FlexboxLayout>
-    <Tappable v-for="(price, i) in prices" :key="price" @tap="setPrice(price)" orientation="horizontal">
+    <Tappable
+      v-for="(price, i) in prices" :key="price" @tap="setPrice(price)"
+      orientation="horizontal"
+    >
       <Image src="~/assets/money.png" v-for="j in i + 1" :key="j" />
-  </Tappable>
+    </Tappable>
   </FlexboxLayout>
 </template>
 

@@ -39,6 +39,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
+    "dotenv": "^6.2.0",
     "eslint": "^5.0.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-import-resolver-jest": "^2.1.1",
@@ -80,7 +81,9 @@
           "multiline": 3
         }
       ],
-      "vue/component-name-in-template-casing": 0
+      "vue/component-name-in-template-casing": 0,
+      "vue/attribute-hyphenation": 0,
+      "vue/singleline-html-element-content-newline": 0
     },
     "globals": {
       "TNS_ENV": false

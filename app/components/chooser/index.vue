@@ -1,5 +1,8 @@
 <template>
-  <transition @enter="enter" @leave="leave" @beforeEnter="beforeEnter" mode="out-in" :css="false">
+  <transition
+    @enter="enter" @leave="leave" @beforeEnter="beforeEnter"
+    mode="out-in" :css="false"
+  >
     <component v-on="$listeners" class="chooser" :is="currentComp" />
   </transition>
 </template>

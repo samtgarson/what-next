@@ -1,6 +1,6 @@
 const TWEEN = require('@tweenjs/tween.js')
 
-TWEEN.now = function () {
+TWEEN.now = function now () {
   return new Date().getTime()
 }
 
@@ -10,7 +10,9 @@ class NativeTween {
     this.tween = this.createTween(opts)
   }
 
-  createTween ({ from, to, duration = 300, ease = TWEEN.Easing.Quadratic.InOut }) {
+  createTween ({
+    from, to, duration = 300, ease = TWEEN.Easing.Quadratic.InOut
+  }) {
     const tween = new TWEEN.Tween(from).to(to, duration)
     tween.easing(ease)
 
