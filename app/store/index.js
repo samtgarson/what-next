@@ -1,7 +1,7 @@
 import Vue from 'nativescript-vue'
 import Vuex from 'vuex'
-import stages from '../services/stages'
-import VenueFetcher from '../services/venue-fetcher'
+import stages from '../constants/stages'
+import venueFetcher from '../services/venue-fetcher'
 
 Vue.use(Vuex)
 
@@ -42,8 +42,8 @@ export default new Vuex.Store({
   actions: {
     async fetchResult ({ state, commit }) {
       try {
-        const fetcher = new VenueFetcher(Object.assign({}, state.params))
-        const { venue, area, distance } = await fetcher.run()
+        const params = Object.assign({}, state.params)
+        const { venue, area, distance } = await venueFetcher(params)
         const { name: category = '' } = venue.categories.find(c => c.primary) || {}
         commit('setResult', {
           area,

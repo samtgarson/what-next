@@ -1,6 +1,6 @@
 <template>
-  <StackLayout v-if="v.error">
-    <Label class="area">No results 😞</Label>
+  <StackLayout v-if="error">
+    <Label class="area" :text="error" />
     <Tappable>
       <FlexboxLayout class="button" @tap="reset">
         <Label>Try again</Label>
@@ -28,6 +28,7 @@
 <script>
 import { openUrl } from 'utils/utils'
 import Tappable from '../tappable'
+import errors from '../../constants/errors'
 
 export default {
   components: { Tappable },
@@ -45,6 +46,18 @@ export default {
   computed: {
     v () {
       return this.$store.state.result
+    },
+    error () {
+      if (!this.v.error) return false
+
+      switch (this.v.error.message) {
+        case errors.NO_RESULTS:
+          return 'No results 🤷‍♀️'
+        case errors.LOCATION_DENIED:
+          return 'Access denied to Location Services 🙅‍♀️'
+        default:
+          return 'Something went wrong 😞'
+      }
     },
     photoUrl () {
       const { prefix, suffix } = this.v.photo
