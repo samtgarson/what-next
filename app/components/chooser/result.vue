@@ -27,7 +27,7 @@
 
 <script>
 import { openUrl } from 'utils/utils'
-import Tappable from '../tappable'
+import Tappable from '../utils/tappable'
 import errors from '../../constants/errors'
 
 export default {

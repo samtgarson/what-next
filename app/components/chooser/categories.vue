@@ -13,7 +13,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import Tappable from '../tappable'
+import Tappable from '../utils/tappable'
 
 const categories = [
   'food',

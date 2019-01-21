@@ -1,6 +1,6 @@
 <template>
   <FlexboxLayout>
-    <Label class="loading">Thinking...</Label>
+    <Label class="loading">🤔 Thinking...</Label>
   </FlexboxLayout>
 </template>
 
