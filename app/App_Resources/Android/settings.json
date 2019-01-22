@@ -1,1 +1,5 @@
-{"appId":"org.samtgarson.whatnext","minSdkVersion":null,"targetSdkVersion":null}
+{
+  "appId": "com.samgarson.whatnext",
+  "minSdkVersion": null,
+  "targetSdkVersion": null
+}

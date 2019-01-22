@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const { relative, resolve, sep } = require("path");
 
 const webpack = require("webpack");
@@ -58,7 +57,7 @@ module.exports = env => {
   const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
 
   const entryModule = nsWebpack.getEntryModule(appFullPath);
-  const entryPath = `.${sep}${entryModule}.js`;
+  const entryPath = `.${sep}${entryModule}`;
   console.log(`Bundling application for entryPath ${entryPath}...`);
 
   const config = {
@@ -85,7 +84,7 @@ module.exports = env => {
       globalObject: "global",
     },
     resolve: {
-      extensions: [".vue", ".js", ".scss", ".css"],
+      extensions: [".vue", ".ts", ".js", ".scss", ".css"],
       // Resolve {N} system modules from tns-core-modules
       modules: [
         resolve(__dirname, "node_modules/tns-core-modules"),
@@ -98,8 +97,8 @@ module.exports = env => {
         '@': appFullPath,
         'vue': 'nativescript-vue'
       },
-      // don't resolve symlinks to symlinked modules
-      symlinks: false,
+      // resolve symlinks to symlinked modules
+      symlinks: true,
     },
     resolveLoader: {
       // don't resolve symlinks to symlinked loaders
@@ -145,13 +144,14 @@ module.exports = env => {
               'collapse_vars': platform !== "android",
               sequences: platform !== "android",
             },
+            keep_fnames: true,
           },
         }),
       ],
     },
     module: {
       rules: [{
-        test: new RegExp(entryPath),
+        test: new RegExp(entryPath + ".(js|ts)"),
         use: [
           // Require all Android app components
           platform === "android" && {
@@ -190,6 +190,14 @@ module.exports = env => {
         loader: 'babel-loader',
       },
       {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+          allowTsInNodeModules: true,
+        },
+      },
+      {
         test: /\.vue$/,
         loader: "vue-loader",
         options: {
@@ -219,9 +227,9 @@ module.exports = env => {
       }]),
       // Copy assets to out dir. Add your own globs as needed.
       new CopyWebpackPlugin([
-        { from: "fonts/**" },
-        { from: "**/*.+(jpg|png)" },
-        { from: "assets/**/*" },
+        { from: { glob: "fonts/**" } },
+        { from: { glob: "**/*.+(jpg|png)" } },
+        { from: { glob: "assets/**/*" } },
       ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
       // Generate a bundle starter script and activate it in package.json
       new nsWebpack.GenerateBundleStarterPlugin([

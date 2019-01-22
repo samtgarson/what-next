@@ -5,26 +5,25 @@
   "author": "Sam Garson <samtgarson@gmail.com>",
   "license": "MIT",
   "nativescript": {
-    "id": "org.samtgarson.whatnext",
-    "tns-ios": {
-      "version": "5.0.0"
-    },
+    "id": "com.samgarson.whatnext",
     "tns-android": {
-      "version": "5.0.0"
+      "version": "5.1.0"
+    },
+    "tns-ios": {
+      "version": "5.1.1"
     }
   },
   "scripts": {
-    "lint": "eslint ./app"
+    "lint": "eslint ./app",
+    "build:ios": "tns build ios --bundle --release --forDevice --teamId SZR99J9ZFT --env.production --env.uglify",
+    "start:ios": "tns run ios --hmr --bundle",
+    "clean": "rm -rf ./platforms"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
-    "@vue/devtools": "5.0.0-beta.3",
     "nativescript-geolocation": "^4.3.1",
     "nativescript-socket.io": "^0.9.0",
-    "nativescript-theme-core": "^1.0.4",
-    "nativescript-toast": "^1.4.6",
     "nativescript-vue": "^2.0.0",
-    "nativescript-vue-devtools": "^1.0.0",
     "tns-core-modules": "^5.1.2",
     "vuex": "^3.0.1"
   },
@@ -32,6 +31,7 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@samtgarson/eslint-config": "^1.0.3",
+    "@vue/devtools": "5.0.0-beta.3",
     "babel-loader": "^8.0.2",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
@@ -51,6 +51,8 @@
     "eslint-plugin-vue": "^5.0.0",
     "lazy": "1.0.11",
     "nativescript-dev-webpack": "^0.19.1-next-2019-01-14-120258-01",
+    "nativescript-toast": "^1.4.6",
+    "nativescript-vue-devtools": "^1.0.0",
     "nativescript-vue-template-compiler": "^2.0.0",
     "nativescript-worker-loader": "~0.9.0",
     "node-sass": "^4.9.2",
