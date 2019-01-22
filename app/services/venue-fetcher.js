@@ -1,29 +1,8 @@
-import * as http from 'http'
+
 import { getCurrentLocation } from 'nativescript-geolocation'
-import qs from 'querystring'
 import errors from '../constants/errors'
+import { search, fetch } from './place-client'
 
-const authParams = qs.stringify({
-  client_id: global.FOURSQUARE_CLIENT_ID,
-  client_secret: global.FOURSQUARE_CLIENT_SECRET,
-  v: '20181024'
-})
-
-const baseURL = 'https://api.foursquare.com/v2/venues'
-
-const buildUrl = ({
-  category, price, latitude, longitude, altitude
-}) => {
-  const query = qs.stringify({
-    openNow: 1,
-    ll: `${latitude},${longitude}`,
-    alt: altitude,
-    section: category,
-    price
-  })
-
-  return `${baseURL}/explore?${query}&${authParams}`
-}
 
 const makeSearch = async ({ category, price }) => {
   let pos
@@ -34,19 +13,11 @@ const makeSearch = async ({ category, price }) => {
   }
 
   const { latitude, longitude, altitude } = pos
-  const url = buildUrl({
+  return search({
     category, price, latitude, longitude, altitude
   })
-  const { response: { headerLocation: area, groups } } = await http.getJSON(url)
-  const { items } = groups[0]
-  return { items, area }
 }
 
-const getDetails = async id => {
-  const detailUrl = `${baseURL}/${id}?${authParams}`
-  const { response: { venue } } = await http.getJSON(detailUrl)
-  return venue
-}
 
 const makeSelection = items => {
   const {
@@ -61,7 +32,7 @@ export default async params => {
   if (items.length === 0) throw new Error(errors.NO_RESULTS)
 
   const { id, distance } = makeSelection(items)
-  const venue = await getDetails(id)
+  const venue = await fetch(id)
 
   return { area, venue, distance }
 }
