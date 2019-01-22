@@ -1,6 +1,6 @@
-# What Next?
+![what-next](https://raw.githubusercontent.com/samtgarson/what-next/master/app/App_Resources/iOS/Assets.xcassets/AppIcon.appiconset/icon-40.png)
 
-> Find what to do next with the power of emojis
+**What Next?** _— Find what to do next with the power of emojis_
 
 ## Usage
 
@@ -8,12 +8,10 @@
 # Install dependencies
 npm install
 
-# Build for production
-tns build <platform> --bundle
+# Run locally
+npm run start:ios
+npm run start:android
 
-# Build, watch for changes and debug the application
-tns debug <platform> --bundle
-
-# Build, watch for changes and run the application
-tns run <platform> --bundle
+# Build for distribution
+npm run build:ios
 ```

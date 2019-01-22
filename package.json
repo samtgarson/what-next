@@ -17,6 +17,7 @@
     "lint": "eslint ./app",
     "build:ios": "tns build ios --bundle --release --forDevice --teamId SZR99J9ZFT --env.production --env.uglify",
     "start:ios": "tns run ios --hmr --bundle",
+    "start:android": "tns run android --hmr --bundle",
     "clean": "rm -rf ./platforms"
   },
   "dependencies": {
