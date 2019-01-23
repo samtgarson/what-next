@@ -14,8 +14,8 @@ import { mapMutations } from 'vuex'
 import Tappable from '../utils/tappable'
 
 const prices = [
-  '1',
-  '2,3',
+  '1,2',
+  '3',
   '4'
 ]
 
