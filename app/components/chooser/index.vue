@@ -13,6 +13,7 @@ import Categories from './categories'
 import Price from './price'
 import Loading from './loading'
 import Result from './result'
+import stages from '../../constants/stages'
 
 const duration = 300
 const curve = AnimationCurve.easeInOut
@@ -24,6 +25,19 @@ export default {
     },
     index () {
       return this.$store.state.stage
+    },
+    stageName () {
+      return Object.keys(stages).find(key => stages[key] === this.index)
+    }
+  },
+  watch: {
+    stageName: {
+      handler (screenName) {
+        return this.$analyticsEvent('change_stage', {
+          stage: screenName
+        })
+      },
+      immediate: true
     }
   },
   methods: {

@@ -27,6 +27,7 @@
 
 <script>
 import { openUrl } from 'utils/utils'
+import { mapState } from 'vuex'
 import Tappable from '../utils/tappable'
 import errors from '../../constants/errors'
 
@@ -41,9 +42,17 @@ export default {
     }
   },
   mounted () {
-    this.$emit('height', this.v.error ? 120 : 375)
+    if (this.v.error) {
+      this.$emit('height', 120)
+      this.$analyticsEvent('error', { error: this.v.error.message })
+    } else {
+      this.$emit('height', 375)
+
+      this.$analyticsEvent('success', { ...this.params, result: this.v.foursquare })
+    }
   },
   computed: {
+    ...mapState(['params']),
     v () {
       return this.$store.state.result
     },
