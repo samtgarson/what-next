@@ -10,16 +10,18 @@ const authParams = qs.stringify({
 const baseURL = 'https://api.foursquare.com/v2/venues'
 
 const buildUrl = ({
-  category, price, latitude, longitude, altitude, radius = 750
+  category, price, latitude, longitude, altitude, radius
 }) => {
-  const query = qs.stringify({
+  const params = {
     openNow: 1,
     ll: `${latitude},${longitude}`,
     alt: altitude,
     section: category,
-    price,
-    radius
-  })
+    price
+  }
+
+  if (radius) params.radius = radius
+  const query = qs.stringify(params)
 
   return `${baseURL}/explore?${query}&${authParams}`
 }

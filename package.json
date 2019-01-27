@@ -16,7 +16,7 @@
   },
   "scripts": {
     "lint": "eslint ./app",
-    "build:ios": "tns build ios --bundle --release --forDevice --teamId SZR99J9ZFT --env.production --env.uglify",
+    "build:ios": "npm run clean && tns build ios --bundle --release --forDevice --teamId SZR99J9ZFT --env.production --env.uglify && open ./platforms/ios/whatnext.xcworkspace",
     "start:ios": "tns run ios --hmr --bundle --env.sourcemaps",
     "start:android": "tns run android --hmr --bundle",
     "clean": "rm -rf ./platforms"
