@@ -1,6 +1,6 @@
 export default {
-  CATEGORY: 0,
-  PRICE: 1,
-  LOADING: 2,
-  RESULT: 3
+  CATEGORY: 'CATEGORY',
+  PRICE: 'PRICE',
+  LOADING: 'LOADING',
+  RESULT: 'RESULT'
 }

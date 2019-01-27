@@ -45,6 +45,7 @@ module.exports = env => {
     production, // --env.production
     report, // --env.report
     hmr, // --env.hmr
+    sourceMap // --env.sourceMap
   } = env;
 
   const externals = (env.externals || []).map((e) => { // --env.externals
@@ -112,7 +113,7 @@ module.exports = env => {
       "fs": "empty",
       "__dirname": false,
     },
-    devtool: "none",
+    devtool: sourceMap ? "inline-source-map" : "none",
     optimization: {
       splitChunks: {
         cacheGroups: {

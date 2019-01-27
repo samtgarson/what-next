@@ -1,6 +1,5 @@
 <template>
   <Page class="page" statusBarStyle="light" actionBarHidden="true">
-    <ActionBar title="My App" />
     <FlexboxLayout class="pageLayout">
       <slot />
     </FlexboxLayout>
@@ -8,7 +7,22 @@
 </template>
 
 <script>
-export default {}
+import * as firebase from 'nativescript-plugin-firebase'
+import ErrorPage from './pages/error'
+
+export default {
+  errorCaptured (err) {
+    console.error(err)
+    this.handleError(err)
+    return false
+  },
+  methods: {
+    async handleError (err) {
+      await firebase.crashlytics.sendCrashLog(err)
+      await this.$showModal(ErrorPage, { fullscreen: true })
+    }
+  }
+}
 </script>
 
 <style lang="scss">

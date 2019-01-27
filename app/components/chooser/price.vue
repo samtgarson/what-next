@@ -20,6 +20,7 @@ const prices = [
 ]
 
 export default {
+  name: 'Price',
   components: { Tappable },
   data () {
     return { prices }

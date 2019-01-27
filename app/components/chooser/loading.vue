@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'Loading',
   mounted () {
     this.$emit('height', 100)
     this.$store.dispatch('fetchResult')

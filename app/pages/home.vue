@@ -4,7 +4,7 @@
       <Label flexGrow="1" id="title">What next?</Label>
       <refresh-button @tap="searchAgain" :show="showRefresh" />
     </FlexboxLayout>
-    <Box :height="height" ref="box">
+    <Box :height="height">
       <Chooser @height="h => height = h" />
     </Box>
     <back-button :show="showBack" @tap="reset" />
@@ -16,6 +16,7 @@ import { mapState, mapMutations } from 'vuex'
 import Chooser from '../components/chooser'
 import RefreshButton from '../components/refresh-button'
 import BackButton from '../components/back-button'
+import stages from '../constants/stages'
 
 export default {
   components: { Chooser, RefreshButton, BackButton },
@@ -25,7 +26,7 @@ export default {
   },
   computed: mapState({
     showRefresh: state => !!state.result,
-    showBack: state => state.stage > 0
+    showBack: state => state.stage !== stages.CATEGORY
   }),
   methods: {
     ...mapMutations(['searchAgain', 'reset'])

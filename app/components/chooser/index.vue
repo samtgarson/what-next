@@ -9,6 +9,7 @@
 
 <script>
 import { AnimationCurve } from 'ui/enums'
+import { mapState } from 'vuex'
 import Categories from './categories'
 import Price from './price'
 import Loading from './loading'
@@ -17,21 +18,23 @@ import stages from '../../constants/stages'
 
 const duration = 300
 const curve = AnimationCurve.easeInOut
+const components = {
+  [stages.CATEGORY]: Categories,
+  [stages.PRICE]: Price,
+  [stages.LOADING]: Loading,
+  [stages.RESULT]: Result
+}
 
 export default {
+  name: 'Chooser',
   computed: {
+    ...mapState(['stage']),
     currentComp () {
-      return [Categories, Price, Loading, Result][this.index]
-    },
-    index () {
-      return this.$store.state.stage
-    },
-    stageName () {
-      return Object.keys(stages).find(key => stages[key] === this.index)
+      return components[this.stage]
     }
   },
   watch: {
-    stageName: {
+    stage: {
       handler (screenName) {
         return this.$analyticsEvent('change_stage', {
           stage: screenName

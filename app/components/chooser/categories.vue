@@ -25,6 +25,7 @@ const categories = [
 ]
 
 export default {
+  name: 'Categories',
   components: { Tappable },
   data () {
     return { categories }
