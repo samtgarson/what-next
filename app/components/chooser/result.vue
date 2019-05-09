@@ -13,7 +13,7 @@
       <Label class="category">{{ v.category }}</Label>
       <Label class="distance">{{ v.distance }}m away</Label>
     </FlexboxLayout>
-    <yellow-button @tap="openWeb">Go there</yellow-button>
+    <yellow-button @tap="openWeb" v-if="url">Go there</yellow-button>
   </StackLayout>
 </template>
 
@@ -28,7 +28,7 @@ export default {
   components: { YellowButton },
   methods: {
     openWeb () {
-      openUrl(this.v.url)
+      openUrl(this.url)
     },
     reset () {
       this.$store.commit('reset')
@@ -48,6 +48,9 @@ export default {
     v () {
       return this.$store.state.result
     },
+    url () {
+      return this.v.url || this.v.foursquare
+    },
     error () {
       if (!this.v.error) return false
 
@@ -61,6 +64,7 @@ export default {
       }
     },
     photoUrl () {
+      if (!this.v.photo) return ''
       const { prefix, suffix } = this.v.photo
       return `${prefix}800x300${suffix}`
     }

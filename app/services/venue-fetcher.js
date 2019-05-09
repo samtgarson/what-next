@@ -2,8 +2,7 @@
 import { getCurrentLocation } from 'nativescript-geolocation'
 import errors from '../constants/errors'
 import { search, fetch } from './place-client'
-
-const closeCategories = ['food', 'drinks', 'coffee']
+import config from './config'
 
 const makeSearch = async ({ category, price }) => {
   let pos
@@ -13,7 +12,8 @@ const makeSearch = async ({ category, price }) => {
     throw new Error(errors.LOCATION_DENIED)
   }
 
-  const radius = closeCategories.includes(category) ? 750 : undefined
+  const { category_radii: radii } = await config()
+  const radius = JSON.parse(radii)[category]
   const { latitude, longitude, altitude } = pos
   return search({
     category, price, latitude, longitude, altitude, radius

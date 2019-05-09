@@ -48,9 +48,7 @@ module.exports = env => {
     sourceMap // --env.sourceMap
   } = env;
 
-  const externals = (env.externals || []).map((e) => { // --env.externals
-    return new RegExp(e + ".*");
-  });
+  const externals = nsWebpack.getConvertedExternals(env.externals);
 
   const mode = production ? "production" : "development"
 
@@ -152,7 +150,7 @@ module.exports = env => {
     },
     module: {
       rules: [{
-        test: new RegExp(entryPath + ".(js|ts)"),
+        test: nsWebpack.getEntryPathRegExp(appFullPath, entryPath + ".(js|ts)"),
         use: [
           // Require all Android app components
           platform === "android" && {
@@ -216,7 +214,8 @@ module.exports = env => {
         "global.TNS_WEBPACK": "true",
         "TNS_ENV": JSON.stringify(mode),
         "global.FOURSQUARE_CLIENT_ID": JSON.stringify(process.env.FOURSQUARE_CLIENT_ID),
-        "global.FOURSQUARE_CLIENT_SECRET": JSON.stringify(process.env.FOURSQUARE_CLIENT_SECRET)
+        "global.FOURSQUARE_CLIENT_SECRET": JSON.stringify(process.env.FOURSQUARE_CLIENT_SECRET),
+        "global.VUE_DEVTOOLS": JSON.stringify(process.env.VUE_DEVTOOLS)
       }),
       // Remove all files from the out dir.
       new CleanWebpackPlugin([`${dist}/**/*`]),

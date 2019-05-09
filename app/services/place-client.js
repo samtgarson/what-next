@@ -1,4 +1,4 @@
-import * as http from 'http'
+import * as http from 'tns-core-modules/http'
 import qs from 'querystring'
 
 const authParams = qs.stringify({

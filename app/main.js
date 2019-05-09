@@ -10,7 +10,7 @@ import Box from './components/box'
 
 import store from './store'
 
-if (TNS_ENV !== 'production') {
+if (TNS_ENV !== 'production' && global.VUE_DEVTOOLS) {
   Vue.use(VueDevtools)
 }
 
