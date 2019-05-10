@@ -1,21 +1,22 @@
-![what-next](https://raw.githubusercontent.com/samtgarson/what-next/master/app/App_Resources/iOS/Assets.xcassets/AppIcon.appiconset/icon-40.png)
+# what-next
 
-**what-next-website** _— Website for What Next?_
+> Find what to do next with the power of emojis
 
 ## Build Setup
 
 ``` bash
 # install dependencies
-yarn
+$ npm install
 
 # serve with hot reload at localhost:3000
-yarn dev
+$ npm run dev
 
 # build for production and launch server
-yarn build
-yarn start
+$ npm run build
+$ npm start
+
+# generate static project
+$ npm run generate
 ```
 
-## Nuxt
-
-We use [Nuxt](https://github.com/nuxt/nuxt.js) as a base framework. For detailed explanation on how Nuxt works, checkout the [Nuxt.js docs](https://nuxtjs.org/guide).
+For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).

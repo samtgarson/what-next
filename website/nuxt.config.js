@@ -1,49 +1,37 @@
-const PRODUCTION = process.env.NODE_ENV === 'production'
-if (!PRODUCTION) {
-  require('dotenv-safe').load({
-    sample: 'config/.env.example',
-    path: 'config/.env'
-  })
+import pkg from './package'
+import Sass from "sass"
+
+
+const customSass = {
+  implementation: Sass
 }
 
-const autoprefixer = require('autoprefixer')
-const { readdirSync } = require('fs')
-const { resolve } = require('path')
+export default {
+  mode: 'universal',
 
-
-const plugins = readdirSync(resolve(__dirname, 'plugins')).map(f => {
-  const [name] = f.split('.')
-  return `@/plugins/${name}`
-})
-
-const serverMiddleware = []
-if (PRODUCTION) serverMiddleware.unshift('@/server-middleware/logger.js')
-
-module.exports = {
-  build: {
-    postcss: [
-      autoprefixer()
-    ],
-    babel: {
-      presets: [
-        'env',
-        'vue-app'
-      ]
-    }
-  },
-  css: [
-    '@@/node_modules/normalize.css/normalize.css'
-  ],
+  /*
+  ** Headers of the page
+  */
   head: {
-    bodyAttrs: {
-      class: ''
-    }
+    title: 'What Next?',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: pkg.description }
+    ],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
+    ]
   },
-  plugins,
-  serverMiddleware,
-  modules: [
-    ['nuxt-env', {
-      keys: ['API_URL']
-    }]
-  ]
+
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#E05E94' },
+
+  build: {
+    loaders: {
+      scss: customSass
+    }
+  }
 }
