@@ -9,9 +9,15 @@
 npm install
 
 # Run locally
-npm run start:ios
-npm run start:android
+npm run start
 
 # Build for distribution
-npm run build:ios
+npm run build
 ```
+
+### To Publish to App Store
+
+1. Run `npm run build`
+2. In XCode, Select `Generic iOS Device` from the devices dropdown
+3. Choose Product > Archive
+4. Distribute and upload to App Store 🚀
