@@ -13,7 +13,7 @@
   },
   "scripts": {
     "lint": "eslint ./app",
-    "build": "npm run clean && tns build ios --bundle --release --forDevice --teamId SZR99J9ZFT --env.production --env.uglify && open ./platforms/ios/whatnext.xcworkspace",
+    "build": "npm run clean && tns build ios --bundle --release --forDevice --teamId SZR99J9ZFT --env.production --env.uglify && open ./platforms/ios/mobile.xcworkspace",
     "start": "tns run ios --hmr --bundle --env.sourcemaps",
     "clean": "rm -rf ./platforms"
   },
