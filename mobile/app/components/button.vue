@@ -1,6 +1,6 @@
 <template>
-  <Tappable :inverted="true" v-bind="$attrs">
-    <FlexboxLayout class="button" :class="{ plain }" @tap="$emit('tap')">
+  <Tappable :inverted="true">
+    <FlexboxLayout class="button" :class="{ plain, small }" @tap="$emit('tap')">
       <Label><slot /></Label>
     </FlexboxLayout>
   </Tappable>
@@ -11,7 +11,10 @@ import Tappable from './utils/tappable'
 
 export default {
   components: { Tappable },
-  props: { plain: Boolean }
+  props: {
+    plain: Boolean,
+    small: Boolean
+  }
 }
 </script>
 
@@ -34,6 +37,15 @@ export default {
 
   &.plain {
     background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &.small {
+    height: 30;
+    margin: 0;
+
+    Label {
+      font-size: 16;
+    }
   }
 }
 </style>

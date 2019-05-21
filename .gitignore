@@ -9,3 +9,4 @@ hooks
 platforms
 .env
 .nuxt
+!.vscode

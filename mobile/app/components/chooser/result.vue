@@ -11,7 +11,7 @@
     </FlexboxLayout>
     <FlexboxLayout>
       <Label class="category">{{ v.category }}</Label>
-      <Label class="distance">{{ v.distance }}m away</Label>
+      <Label class="distance" v-if="v.distance">{{ v.distance }}m away</Label>
     </FlexboxLayout>
     <btn class="link-btn" @tap="openWeb" v-if="url">🔗 Read More</btn>
     <btn class="next-btn" @tap="searchAgain" :plain="true">🙅‍♀️ Try Again</btn>
@@ -19,18 +19,22 @@
 </template>
 
 <script>
-import { openUrl } from 'utils/utils'
 import { mapState, mapMutations } from 'vuex'
 import Btn from '../button'
 import errors from '../../constants/errors'
+import Browser from '../browser'
 
 export default {
   name: 'Result',
   components: { Btn },
   methods: {
     ...mapMutations(['searchAgain']),
-    openWeb () {
-      openUrl(this.url)
+    async openWeb () {
+      try {
+        await this.$showModal(Browser, { props: { url: this.url } })
+      } catch (e) {
+        console.error(e)
+      }
     },
     reset () {
       this.$store.commit('reset')
@@ -102,6 +106,7 @@ Label {
     text-align: right;
     font-weight: 300;
     font-size: 20;
+    width: 30%;
   }
 }
 

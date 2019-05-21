@@ -1,6 +1,6 @@
 import * as firebase from 'nativescript-plugin-firebase'
 
-const production = TNS_ENV === 'production'
+const production = global.TNS_ENV === 'production'
 
 export default async () => {
   const { properties } = await firebase.getRemoteConfig({
