@@ -1,6 +1,6 @@
 <template>
   <Tappable :inverted="true">
-    <FlexboxLayout class="button" @tap="$emit('tap')">
+    <FlexboxLayout class="button" :class="{ plain, small }" @tap="$emit('tap')">
       <Label><slot /></Label>
     </FlexboxLayout>
   </Tappable>
@@ -10,7 +10,11 @@
 import Tappable from './utils/tappable'
 
 export default {
-  components: { Tappable }
+  components: { Tappable },
+  props: {
+    plain: Boolean,
+    small: Boolean
+  }
 }
 </script>
 
@@ -28,6 +32,20 @@ export default {
     color: black;
     text-align: center;
     font-weight: 700;
+    width: 100%;
+  }
+
+  &.plain {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &.small {
+    height: 30;
+    margin: 0;
+
+    Label {
+      font-size: 16;
+    }
   }
 }
 </style>

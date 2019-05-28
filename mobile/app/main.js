@@ -1,5 +1,4 @@
 import Vue from 'nativescript-vue'
-import VueDevtools from 'nativescript-vue-devtools'
 import * as firebase from 'nativescript-plugin-firebase'
 import { device } from 'tns-core-modules/platform'
 
@@ -10,8 +9,8 @@ import Box from './components/box'
 
 import store from './store'
 
-if (TNS_ENV !== 'production' && global.VUE_DEVTOOLS) {
-  Vue.use(VueDevtools)
+if (global.TNS_ENV !== 'production' && global.VUE_DEVTOOLS) {
+  Vue.use(require('nativescript-vue-devtools'))
 }
 
 Vue.component('Layout', Layout)
@@ -27,7 +26,7 @@ Vue.prototype.$analyticsEvent = (key, params) => {
 
 new Vue({
   render: h => h('frame', [h(Home)]),
-  async mounted () {
+  async mounted() {
     await firebase.init()
     firebase.analytics.setUserId({ userId: device.uuid })
     firebase.crashlytics.setUserId(device.uuid)

@@ -13,12 +13,14 @@
   },
   "scripts": {
     "lint": "eslint ./app",
-    "build": "npm run clean && tns build ios --bundle --release --forDevice --teamId SZR99J9ZFT --env.production --env.uglify && open ./platforms/ios/whatnext.xcworkspace",
+    "build": "npm run clean && tns build ios --bundle --release --forDevice --teamId SZR99J9ZFT --env.production --env.uglify && open ./platforms/ios/mobile.xcworkspace",
     "start": "tns run ios --hmr --bundle --env.sourcemaps",
-    "clean": "rm -rf ./platforms"
+    "clean": "rm -rf ./platforms",
+    "test": "jest"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
+    "esm": "^3.2.25",
     "nativescript-geolocation": "^4.3.1",
     "nativescript-plugin-firebase": "^7.7.0",
     "nativescript-vue": "^2.0.0",
@@ -48,6 +50,7 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-vue": "^5.0.0",
+    "jest": "^24.8.0",
     "lazy": "1.0.11",
     "nativescript-dev-webpack": "^0.21.2",
     "nativescript-socketio": "^3.2.1",
@@ -59,6 +62,7 @@
     "prettier": "prettier/prettier#master",
     "sass-loader": "^7.1.0",
     "terser-webpack-plugin": "^1.1.0",
+    "vue": "^2.6.10",
     "vue-loader": "^15.2.6",
     "webpack": "^4.16.4",
     "webpack-bundle-analyzer": "~2.13.1",
@@ -88,9 +92,13 @@
       "vue/singleline-html-element-content-newline": 0
     },
     "globals": {
-      "TNS_ENV": false,
       "NSError": false,
       "java": false
     }
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/**/*.js"
+    ]
   }
 }

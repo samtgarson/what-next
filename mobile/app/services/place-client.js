@@ -30,11 +30,14 @@ export const search = async params => {
   const url = buildUrl(params)
   const { response: { headerLocation: area, groups } } = await http.getJSON(url)
   const { items } = groups[0]
-  return { items, area }
+  const venues = items.map(i => ({ id: i.venue.id, distance: i.venue.location.distance }))
+  return { items: venues, area }
 }
 
 export const fetch = async id => {
   const detailUrl = `${baseURL}/${id}?${authParams}`
-  const { response: { venue } } = await http.getJSON(detailUrl)
+  const data = await http.getJSON(detailUrl)
+
+  const { response: { venue } } = data
   return venue
 }

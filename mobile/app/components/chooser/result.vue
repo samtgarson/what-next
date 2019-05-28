@@ -1,7 +1,7 @@
 <template>
   <StackLayout v-if="error">
     <Label class="area" :text="error" />
-    <yellow-button @tap="reset">Try again</yellow-button>
+    <btn @tap="reset">Try again</btn>
   </StackLayout>
   <StackLayout v-else>
     <Label class="area">{{ v.area }}</Label>
@@ -11,24 +11,30 @@
     </FlexboxLayout>
     <FlexboxLayout>
       <Label class="category">{{ v.category }}</Label>
-      <Label class="distance">{{ v.distance }}m away</Label>
+      <Label class="distance" v-if="v.distance">{{ v.distance }}m away</Label>
     </FlexboxLayout>
-    <yellow-button @tap="openWeb" v-if="url">Go there</yellow-button>
+    <btn class="link-btn" @tap="openWeb" v-if="url">🔗 Read More</btn>
+    <btn class="next-btn" @tap="searchAgain" :plain="true">🙅‍♀️ Try Again</btn>
   </StackLayout>
 </template>
 
 <script>
-import { openUrl } from 'utils/utils'
-import { mapState } from 'vuex'
-import YellowButton from '../button'
+import { mapState, mapMutations } from 'vuex'
+import Btn from '../button'
 import errors from '../../constants/errors'
+import Browser from '../browser'
 
 export default {
   name: 'Result',
-  components: { YellowButton },
+  components: { Btn },
   methods: {
-    openWeb () {
-      openUrl(this.url)
+    ...mapMutations(['searchAgain']),
+    async openWeb () {
+      try {
+        await this.$showModal(Browser, { props: { url: this.url } })
+      } catch (e) {
+        console.error(e)
+      }
     },
     reset () {
       this.$store.commit('reset')
@@ -39,7 +45,7 @@ export default {
       this.$emit('height', 120)
       this.$analyticsEvent('error', { error: this.v.error.message })
     } else {
-      this.$emit('height', 375)
+      this.$emit('height', 435)
       this.$analyticsEvent('success', { ...this.params, result: this.v.foursquare })
     }
   },
@@ -76,6 +82,7 @@ export default {
 Label {
   font-weight: 600;
   flex-grow: 1;
+  width: 100%;
 
   &.area {
     width: 100%;
@@ -99,6 +106,7 @@ Label {
     text-align: right;
     font-weight: 300;
     font-size: 20;
+    width: 30%;
   }
 }
 
@@ -112,5 +120,9 @@ Label {
     height: 100%;
     width: 100%;
   }
+}
+
+.next-btn {
+  margin-top: -10;
 }
 </style>

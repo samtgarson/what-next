@@ -1,7 +1,7 @@
 
 import { getCurrentLocation } from 'nativescript-geolocation'
 import errors from '../constants/errors'
-import { search, fetch } from './place-client'
+import { search } from './place-client'
 import config from './config'
 
 const makeSearch = async ({ category, price }) => {
@@ -20,21 +20,10 @@ const makeSearch = async ({ category, price }) => {
   })
 }
 
-
-const makeSelection = items => {
-  const {
-    venue: { id, location: { distance } }
-  } = items[Math.floor(Math.random() * items.length)]
-
-  return { id, distance }
-}
-
 export default async params => {
-  const { items, area } = await makeSearch(params)
+  const attrs = { ...params }
+  const { items, area } = await makeSearch(attrs)
   if (items.length === 0) throw new Error(errors.NO_RESULTS)
 
-  const { id, distance } = makeSelection(items)
-  const venue = await fetch(id)
-
-  return { area, venue, distance }
+  return { area, items }
 }
