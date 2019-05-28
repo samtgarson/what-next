@@ -22,7 +22,6 @@
   </p>
   <p>The app does use third party services that may collect information used to identify you.</p>
   <div>
-    <p>Link to privacy policy of third party service providers used by the app</p>
     <ul>
       <li><a href="https://firebase.google.com/policies/analytics" target="_blank">Firebase Analytics</a></li>
     </ul>
